@@ -1,0 +1,19 @@
+ux design -> entender quem é a pessoa que vai utilizar o software
+média de idade, caracteristicas e por ai vai, para o produto ser
+agradavel ao usuário.
+
+de acordo com as pesquisas realizadas elabora o desing do software
+pesquisa, protóripos,
+personas,
+objetivos -> da aplicação
+ui design -> o que cria a interface
+
+frond-end: desenvolve a aplicação que aparece pro cliente
+
+framework é, de forma básica, um facilitador, traz soluções pré definidas
+
+back-end: pega as requisições e retorna as requisições, trabalha com banco de dados e servidor
+programação voltada pra ambos, calculos, verificações, consultas e etc
+api -> interface de programação de aplicativos, permite que dois aplicativos conversem entre si
+
+full stack -> a pessoa que faz os dois, tanto back-end e frond-end

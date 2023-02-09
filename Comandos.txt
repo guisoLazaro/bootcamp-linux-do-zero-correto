@@ -1,0 +1,283 @@
+shutdown 0 -> desliga imediatamente
+ec2 -> procurar na aws para criar máquin virtual
+no windows, para usar o wsl -> no terminal digitar:
+bcdedit /set hypervisorlaunchtype auto
+
+ip a -> exibe os ips no linux
+ssh guilazaro@ip -> acessa máquina virtual linux dentro do linux
+usando o terminal
+
+ssh -i Ubunto-AWS.pem ubunto@ip -> acessar máquina virtual na aws 
+dentro do linux usando terminal, UBUNTO-AWS é o nome da maquina, ubunto 
+é o usuário e ip é o ip remoto da máquina na aws
+
+sudo apt-get instal "aplicativo/serviço" -> instalação de aplicativos/serviços no linux
+
+date -> exibe a data e hora atual
+clear -> limpa a tela
+-------------------------------------------------------------------
+manipulando arquivos:
+
+pwd -> local aonde está
+
+cd / -> vai pra raiz do sistema
+
+ls -> listar arquivos do diretorio em que esta
+
+cd /var -> entrar em uma pasta dentro do diretorio em que esta
+
+cd log -> entra na pasta log que está dentro da pasta var
+
+cd .. -> volta pro diretório anterior
+
+cd ../backups -> volta um diretorio atrás e já abre uma pasta dentro dele
+
+cd /var/ -> apertar tab duas vezes aparece o que tem dentro da pasta antes de entrar
+-----------------------------------------------------------------------
+filtrar exibição de arquivos:
+
+ls | more -> lista os arquivos, quando não tem barra de rolagem
+
+ls "nome do arquivo" -> quando tem muitos arquivos, ele busca para ver se tem
+o arquivo digitado
+
+ls p* -> lista arquivos que começam com p
+
+ls m?g* -> primeira letra m, segunda qualquer uma, terceira g e o restante qualquer uma
+
+touch "nome do arquivo" -> cria arquivo
+
+cd ~ -> vai direto pro diretório do usuário
+
+ls arquivo[1-3]* -> lista arquivos do 1 ao 3 por exemplo
+
+ls arquivo[2,5]* -> lista arquivos 2 e 5
+
+ls arquivo[^2,5]* -> lista todos menos o 2 e o 5
+-------------------------------------------------------------------
+Localizando arquivos:
+
+ls /sys -> lista arquivos dentro do diretorio sys que esta dentro da raiz
+
+ls /sys/kernel -> todos arquivos que estão dentro da sys/kernel
+
+ls /sys/kernel/p*  -> lista aquivos que começam com o p e tem qualquer letra depois
+
+find -name arquivo -> busca arquivos pelo nome
+find -name arq* -> busca arquivos pelo nome
+
+Criando diretórios:
+
+mkdir "nome da pasta" -> cria diretório
+mkdir /home/nomedousuario -> cria apartir da raiz, sem precisar ir até o diretório
+mkdir 'Meus Documentos' -> sempre que for criar diretório com duas
+palavras, contendo espaços, usar aspa simples, pois se não
+ele entende que vai ser criado dois diretórios, no caso, meus e documentos
+
+cd 'Meus Documentos' -> para acessar diretórios assim, precisa de
+aspas também
+-----------------------------------------------------------------
+Excluindo arquivos e diretórios:
+
+rmdir "nome do arquivo" -> exclui o diretório, porém, se tiver conteudo
+dentro, não exclui
+
+rm "nome do arquivo" -> exclui arquivos
+
+rm arquivo* -> exclui tudo que começa com arquivo , filtragem pra excluir
+
+rm -rf "diretório" -> apaga o que tem dentro de planilhas e planilhas também
+
+ls --help -> ajuda dos comandos usando o ls
+
+ls -l -> lista longa, mostra as permissões também
+
+ls -a -> lista todos arquivos, inclusive ocultos
+
+ls -h -> exibe formato humano, legivel, no caso o tamanho do arquivo
+
+rm -rfv -> o v serve pra mostrar o que ele esta fazendo
+
+rm -rfvi -> letra i, pede confirmação de exclusão
+
+man ls -> ajuda sobre comando ls
+
+help ls -> ajuda também
+
+help.ubunto.com -> site para ajuda ubunto
+
+Usuário root:
+
+cat /etc/group -> lista os grupos
+
+sudo mkdir "Diretório" -> usa o sudo para criar diretório aonde
+não tem permissão (sendo do grupo sudo)
+
+sudo passwd root - atribui senha para o usuario root no caso
+
+su -> logar como usuário root
+
+su "nome do usuário" -> volta para o outro usuário
+
+cat -> mostra conteudo dentro de arquivos texto
+
+cat /etc/ssh/sshd_config -> arquivo que tem config para permitir
+ou não acesso remoto usando login root
+
+nano "caminho/nomedocarquivo" -> nano editor para editar o arquivo
+
+obs.: para editar o arquivo de configuração, tirar o jogo da velha
+
+systemctl status sshd -> visualiza o status do serviço desejado
+
+system restart sshd -> reinicia determinado serviço
+-----------------------------------------------------------
+Trabalhando com arquivos de texto:
+
+vi -> editor de testo
+
+digitar letra i dentro do texto aberto com vi, permite inserção
+tecla ESC para sair da edição
+:wq -> salva e sai do editor
+:q -> sair sem falvar
+:w -> salvar
+
+nano "nome do arquivo" -> se não tiver ele cria
+
+Histórico de comandos:
+
+history -> lista comandos do usuário usados recentemente
+
+!"numero do comando" -> utiliza o comando desejado com base no numero
+exibido na lista do history
+
+!?ls? -> busca por comando com base no nome que passou
+
+history | grep "Nome do arquivo" -> mostra todos comandos usaros 
+no nome do arquivo
+
+export HISTTIMEFORMAT="%c" -> para exibir data e hora ao utilizar
+o comando history
+
+history -c -> apaga o historico
+
+set +o history -> desativa o historico para usar os comandos
+
+set -o history -> volta ao normal
+
+history -w -> armazena em arquivo comandos utilizados
+fica na pasta do usuário esse arquivo
+
+-----------------------------------------------------
+Gerenciando usuários no linux:
+
+useradd "nomeUsuario" -> cria um usuário novo
+
+userdel -f joao -> exclui um usuário
+
+useradd joao -m -c "da silva" -> cria o usuario
+-m: cria a pasta home, -c: sobrenome do usuário
+
+passwd joao -> cria a senha do usuário
+
+chsh -s /bin/bash joao -> seta o shell que o usuário vai usar
+
+userdel -r -f joao -> exclui tudo, inclusive o diretorio home do usuário
+
+useradd joao -m -c "Joao da Silva" -s /bin/bash -> ja indica o shell na criação do usuário
+
+-e 26/06/2022 -> passa ate qual data o usuario vai poder usar o sistema
+
+usermod joao -s /bin/bash -> modifica usuario, setando o bash
+
+passwd joao -e -> caso nao passa uma data de expiração 
+pra senha, o usuario precisa trocar no primeiro login a senha
+
+cat /etc/passwd -> mostra as informações do usuários que já foram criados
+
+#!bin/bash -> para criar arquivo de script precisa por no inicio
+
+useradd convidado1 -c "Convidado especial" -s /bin/bash -m -p $(openssl passwd Senha123)
+
+permissao para executar arquivo de script:
+chmod +x criar_user.sh
+
+./criar_user.sh -> executa o script
+
+usermod -G adm, sudo mariana -> coloca o usuario no grupo adm e sudo
+
+cat /etc/group -> visualiza os grupos
+
+groupadd GRP_ADM -> cria um grupo
+groupadd GRP_VEN -> cria um grupo
+
+criar usuario com o grupo:
+useradd convidado1 -c "Convidado especial" -s /bin/bash -m -p $(openssl passwd Senha123) -G GRP_ADM
+
+gpasswd -d mariana sudo -> remove usuario de um grupo somente
+--------------------------------------------------
+Permissões:
+
+ls -l lista com permissões
+
+drwxr-xr-x 3 convidado1 -> r: read(leitura), w: write(gravação), x: execute(execução) -> primeiro bloco: dono, segundo bloco: grupo, terceiro bloco: outros, o d signfica diretório
+
+chown "usuario":GRP_ADM /adm/ -> troca o dono do grupo, e coloca ele como dono do diretorio adm
+
+alteração de permissões:
+leitura(R) -> 4
+gravação(W) -> 2
+execução(X) -> 1
+
+Como são dividas em blocos de 3, é necessário fazer a soma, ex: bloco 1: se for dar permissão total precisa somar leitura, gravação e execução
+
+chmod 750 /adm/ -> altera permissões do diretório do adm -> dono: permissão total = 7, grupo: permissão de leitura e gravação total = 5, outros: 0
+
+----------------------------------------------------
+Gernciamento de pacotes:
+
+apt-get
+apt
+
+apt-get update : busca atualização
+apt-get upgrade: instala as atualizações
+apt-get install : instala aplicativos
+
+apt list --installed -> verifica o que tem instalado
+apt list --upgradeable -> verifica se tem atualização de apps
+apt search "nomeapp" -> verifica se está disponivel
+
+
+wget -> software pra download, digita o comando wget
+seguido do link
+
+unzip -> software para descompactar arquivos zip
+unrar -> software para descompactar arquivos rar
+
+apt edit-sources -> colocar link de repositório novo
+
+-----------------------------------------------------
+Gerenciador de pacotes RedHat:
+
+dnf -> comando pra atualização no redhat
+yum -> comando para atualização no redhat
+sempre digitar o comando e depois --help para ver os comandos que acompanham
+
+o update no redhat ja instala direto, não precisa do upgrade após
+
+------------------------------------------------------
+Realizando a instalação de arquivos DEB:
+
+apt instal ./"nome do arquivo"
+
+
+
+
+
+
+
+
+
+
+
+
